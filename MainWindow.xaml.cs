@@ -50,8 +50,8 @@ namespace CidadesSC
 
                         double temperatureKelvin = Convert.ToDouble(weatherData["main"]["temp"]);
                         double temperatureCelsius = temperatureKelvin - 273.15;
-
-                        string resultText = $"Clima em {cityName}: {description}\nTemperatura: {temperatureCelsius:F1}°C";
+                        string descricaoPTBR = TraduzirFacil(description);
+                        string resultText = $"Clima em {cityName}: {descricaoPTBR}\nTemperatura: {temperatureCelsius:F1}°C";
                         WeatherTextBlock.Text = resultText;
                     }
                     else
@@ -68,6 +68,33 @@ namespace CidadesSC
         private void CityTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             CityTextBox.Text = ""; // Limpar o texto de dica quando o TextBox receber foco
+        }
+
+        private string TraduzirFacil(string Descricao)
+        {
+            switch (Descricao.ToLower()) 
+            {
+                case "clear sky":
+                    return "Céu Limpo";
+                case "few clouds":
+                    return "Poucas Nuvens";
+                case "scattered clouds":
+                    return "Nuvens Dispersas";
+                case "broken clouds":
+                    return "Nuvens Quebradas";
+                case "shower rain":
+                    return "Chuva Rápida";
+                case "rain":
+                    return "Chuva";
+                case "thunderstorm":
+                    return "Tempestade";
+                case "snow":
+                    return "Neve";
+                case "mist":
+                    return "Neblina";
+                default:
+                    return Descricao;
+            }
         }
 
     }
